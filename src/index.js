@@ -6,8 +6,6 @@ import Fastify from "fastify";
 import fastifyStatic from "@fastify/static";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
-import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import dotenv from "dotenv";
 logging.set_level(logging.INFO);
 
@@ -78,14 +76,18 @@ fastify.get("/", (req, reply) => {
   return reply.sendFile("index.html", publicDir);
 });
 
+// Vercel-friendly local copies under public/
+const localEpoxyPath = path.join(publicDir, "epoxy");
+const localBaremuxPath = path.join(publicDir, "baremux");
+
 fastify.register(fastifyStatic, {
-  root: epoxyPath,
+  root: localEpoxyPath,
   prefix: "/epoxy/",
   decorateReply: false,
 });
 
 fastify.register(fastifyStatic, {
-  root: baremuxPath,
+  root: localBaremuxPath,
   prefix: "/baremux/",
   decorateReply: false,
 });
