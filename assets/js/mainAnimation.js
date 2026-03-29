@@ -4,7 +4,7 @@ const dbName = "WebsiteSettingsDB";
 const storeName = "backgrounds";
 const KEY = "userBackground";
 if (backgroundURL == null) {
-	localStorage.setItem("backgroundURL", "/assets/img/bg3.png");
+	localStorage.setItem("backgroundURL", "linear-gradient(120deg, #0f2340, #2f4c7c, #6d9cc9)");
 	backgroundURL = localStorage.getItem("backgroundURL");
 }
 async function useStore(mode, cb) {
@@ -48,10 +48,7 @@ async function applyBackgroundFromDB() {
 	if (backgroundURL.startsWith("blob")) {
 		await applyBackgroundFromDB();
 	} else {
-		document.documentElement.style.setProperty(
-			"--backgroundURL",
-			`url(${backgroundURL})`,
-		);
+		document.documentElement.style.setProperty("--backgroundURL", backgroundURL.startsWith('/') ? `url(${backgroundURL})` : backgroundURL);
 	}
 })();
 

@@ -117,7 +117,7 @@ let backgroundURL = localStorage.getItem("backgroundURL");
 function setDefaultBackground(url) {
 	localStorage.setItem("backgroundURL", url);
 	backgroundURL = localStorage.getItem("backgroundURL");
-	document.documentElement.style.setProperty("--backgroundURL", `url(${url})`);
+	document.documentElement.style.setProperty("--backgroundURL", url.startsWith('/') ? `url(${url})` : url);
 }
 const dbName = "WebsiteSettingsDB";
 const storeName = "backgrounds";

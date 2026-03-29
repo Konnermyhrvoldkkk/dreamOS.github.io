@@ -318,13 +318,10 @@ let backgroundURL = localStorage.getItem("backgroundURL");
 function setDefaultBackground(url) {
   localStorage.setItem("backgroundURL", url);
   backgroundURL = localStorage.getItem("backgroundURL");
-  document.documentElement.style.setProperty(
-    "--backgroundURL",
-    `url(${url})`
-  );
+  document.documentElement.style.setProperty("--backgroundURL", url.startsWith('/') ? `url(${url})` : url);
 }
 if (backgroundURL == null) {
-  localStorage.setItem("backgroundURL", "/assets/img/bg3.png");
+  localStorage.setItem("backgroundURL", "linear-gradient(120deg, #0f2340, #2f4c7c, #6d9cc9)");
 }
 
 const dbName = "WebsiteSettingsDB";
